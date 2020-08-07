@@ -17,7 +17,6 @@
         <testng.version>7.0.0</testng.version>
         <selenium.version>3.141.59</selenium.version>
     </properties>
-
     <!-- All plugin will start here-->
     <build>
         <!-- compiler plugin to make sure we are using right java version -->
@@ -32,29 +31,29 @@
                 </configuration>
             </plugin>
             <!--surefire plugin to run test cases-->
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-surefire-plugin</artifactId>
-              <version>${surefire.version}</version>
-              <configuration>
-                <suiteXmlFiles>
-                     <file>${ng.xml.file1}</file>
-                    <file>${ng.xml.file2}</file>
-                </suiteXmlFiles>
-              </configuration>
-          </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <file>${ng.xml.file1}</file>
+                        <file>${ng.xml.file2}</file>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <!-- Dependencies goes here -->
     <dependencies>
-        <!--TestNG dependancy to write test methods-->
+        <!-- TestNG dependancy to write test methods -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
-        <!--Selenium dependancy -->
+        <!-- Selenium dependancy -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>

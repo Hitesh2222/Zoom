@@ -1,6 +1,5 @@
 package config;
 
-import jdk.nashorn.internal.runtime.regexp.joni.Config;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,12 +12,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 
-public class config {
-    private static Logger logger = LogManager.getLogger(config.class);
+public class Config {
+    private static Logger logger = LogManager.getLogger(Config.class);
     private static final String CONFIG_FILE = "framework.properties";
-    private static config obj;
+    private static Config obj;
     private Properties properties;
-    private config(){
+    private Config(){
         Path path = Paths.get("src","test","resources",CONFIG_FILE);
         if (Files.exists(path)) {
             logger.info("Reading file {}", path.getFileName());
@@ -42,7 +41,7 @@ public class config {
             throw new RuntimeException("Invalid Key NULL passed !");
         }
         if(obj==null){
-            obj = new config();
+            obj = new Config();
         }
         return obj.properties.getProperty(key);
     }
