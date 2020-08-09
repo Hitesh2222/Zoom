@@ -23,7 +23,6 @@ public class DriverManager {
             System.setProperty(BrowserType.CHROME_PROPERTY, Config.getProperty("chrome.executable"));
             driver = new ChromeDriver();
         }
-
     }
     public static WebDriver getDriver(){
         if(instance == null){
