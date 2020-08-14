@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Pragra2">
+    <parameter name="browser" value="firefox"></parameter>
+    <test name="abc">
+        <classes>
+            <class name="testcases.HomeTest"></class>
+        </classes>
+    </test>
+</suite>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project> xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -7,13 +7,13 @@
     <groupId>org.example</groupId>
     <artifactId>selwd2</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <!-- All versions and other configuration goes here-->=
+    <!-- All versions and other configuration goes here-->
     <properties>
         <java.version>1.8</java.version>
         <compiler.version>3.8.1</compiler.version>
         <surefire.version>3.0.0-M4</surefire.version>
-        <ng.xml.file1>testng1.xml</ng.xml.file1>
-        <ng.xml.file2>testng2.xml</ng.xml.file2>
+        <ng.xml.file1>${project.basedir}/testng1.xml</ng.xml.file1>
+        <ng.xml.file2>${project.basedir}/testng2.xml</ng.xml.file2>
         <testng.version>7.0.0</testng.version>
         <selenium.version>3.141.59</selenium.version>
     </properties>
@@ -38,7 +38,6 @@
                 <configuration>
                     <suiteXmlFiles>
                         <file>${ng.xml.file1}</file>
-                        <file>${ng.xml.file2}</file>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
@@ -83,6 +82,11 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>4.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>4.1.7</version>
         </dependency>
     </dependencies>
 </project>

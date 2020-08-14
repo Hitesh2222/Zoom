@@ -16,7 +16,7 @@ import java.util.Date;
 public class Utility {
     private static void createDirs(Path path) throws IOException {
         if (Files.exists(path)){
-            System.out.println("File already exist !");
+            // System.out.println("File already exist !");
             return;
         }
         Files.createDirectories(path);
@@ -54,6 +54,10 @@ public class Utility {
 
     private static File getScreenShot(WebDriver driver){
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+    }
+    public static String reportFile() throws IOException {
+        createDirs(Paths.get("target/reports"));
+        return Paths.get("target/reports","TestReport_"+getTimeStampWithFormat()+".html").toString();
     }
 
 }

@@ -1,25 +1,23 @@
 package testcases;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import config.Config;
 import data.ExcelDataManager;
 import drivemanager.DriverManager;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import io.restassured.response.Validatable;
 import io.restassured.response.ValidatableResponse;
 import listeners.ScreenshotListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import pages.DataSciencePage;
 import pages.MainNavBar;
 import pages.TopNavBar;
 import pages.contactSaleaPage;
+import reports.HtmlReports;
 import utils.Utility;
 
 import java.io.IOException;
@@ -29,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 @Listeners(ScreenshotListener.class)
 public class HomeTest {
         private static Logger logger = LogManager.getLogger(HomeTest.class);
-        WebDriver driver = DriverManager.getDriver();
+        WebDriver driver;
 
         MainNavBar mainNavBar;
         contactSaleaPage saleaPage;
@@ -56,21 +54,31 @@ public class HomeTest {
 //                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 //        }
 
-
         @BeforeSuite
         public void setUp() {
+                driver = DriverManager.getDriver();
                 driver.get(Config.getProperty("app.url"));
 //                WebDriverWait wait = new WebDriverWait(driver,10);
 //                wait.until(ExpectedConditions.presenceOfElementLocated(By.id("truste-consent-buttons"))).click();
         }
 
-        @Test(enabled = false)
+        @Test(enabled = true)
         public void testMeetingChat() {
+                ExtentTest test = HtmlReports.createTest("testMeetingChat");
+                test.log(Status.INFO,"initialized Menu Bar");
                 mainNavBar = new MainNavBar(driver);
+                test.log(Status.INFO,"Clicked Meeting");
                 mainNavBar.clickOnMeeting();
-                Assert.assertEquals(driver.getTitle(),"Zoom Meetings - Zoom");
+
+                try {
+                        Assert.assertEquals(driver.getTitle(),"Zoom Meetings - Zoom");
+                        test.log(Status.PASS,"Title Matches");
+                }catch (Exception ex){
+                        test.log(Status.FAIL,"Title Does Not Matches");
+                        throw ex;
+                }
         }
-        @Test(dataProvider = "contactProvider2",dataProviderClass = ExcelDataManager.class)
+        @Test(dataProvider = "contactProvider2",dataProviderClass = ExcelDataManager.class,enabled = false)
         public void checkContactSales(String email,String company,String firstName,String lastname){
                 mainNavBar = new MainNavBar(driver);
                 saleaPage = mainNavBar.clickOnContactSales();
@@ -109,9 +117,10 @@ public class HomeTest {
 //                System.out.println(s);
         }
 
-        @AfterSuite
+        @AfterTest
         public void tearDown() throws InterruptedException {
                 Thread.sleep(10000);
+                HtmlReports.flush();
                 DriverManager.getDriver().quit();
         }
 }
